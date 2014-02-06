@@ -2,13 +2,11 @@
 
 class Users extends \Phalcon\Mvc\Collection
 {
-    public $_id;
-    public $username;
-    public $password;
-    public $salt;
-    public $email;
-    public $dateofbirth;
-    public $datetime;
+    private $_id;
+    private $username;
+    private $email;
+    private $dateofbirth;
+    private $datetime;
     
     public function initialize()
     {
@@ -56,7 +54,8 @@ class Users extends \Phalcon\Mvc\Collection
     
     public function setDateOfBirth($dob)
     {
-        $this->dateofbirth = $dob;
+        //Converting it to UTF-8 to prevent errors with MongoDB
+        $this->datetime = mb_convert_encoding($dob, "UTF-8", "ISO-8859-1");
     }
     
     public function getDateOfBirth()
@@ -67,7 +66,7 @@ class Users extends \Phalcon\Mvc\Collection
     public function setDateTime($datetime)
     {
         //Converting it to UTF-8 to prevent errors with MongoDB
-        $this->datetime = mb_convert_encoding($datetime, "UTF-8", "ISO-8859-1");
+        $this->dateofbirth = mb_convert_encoding($datetime, "UTF-8", "ISO-8859-1");
     }
     
     public function getDateTime()

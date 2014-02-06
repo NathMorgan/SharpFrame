@@ -1,11 +1,12 @@
 <?php
-class Passwords extends \Phalcon\Mvc\Collection {
+class Passwords extends \Phalcon\Mvc\Collection 
+{
     
-    public $_Userid;
-    public $password;
-    public $salt;
-    public $passwordchange;
-    public $lastlogin;
+    private $_Userid;
+    private $password;
+    private $salt;
+    private $passwordchange;
+    private $lastlogin;
     
     public function initialize()
     {
@@ -28,9 +29,9 @@ class Passwords extends \Phalcon\Mvc\Collection {
         $hashedpassword = hash('sha256', $salt + $password);
         
         //Converting it to UTF-8 to prevent errors with MongoDB
-        $this->password = $hashedpassword;
+        $this->password = mb_convert_encoding($hashedpassword, "UTF-8", "ISO-8859-1");
         
-        $this->salt = $salt;
+        setSalt($salt);
     }
     
     public function getPassword()
@@ -40,7 +41,8 @@ class Passwords extends \Phalcon\Mvc\Collection {
     
     public function setSalt($salt)
     {
-        $this->salt = $salt;
+        //Converting it to UTF-8 to prevent errors with MongoDB
+        $this->salt = mb_convert_encoding($salt, "UTF-8", "ISO-8859-1");
     }
     
     public function getSalt()
@@ -50,7 +52,8 @@ class Passwords extends \Phalcon\Mvc\Collection {
     
     public function setPasswordChange($datetime)
     {
-        $this->setPasswordChange = $datetime;
+        //Converting it to UTF-8 to prevent errors with MongoDB
+        $this->setPasswordChange = mb_convert_encoding($datetime, "UTF-8", "ISO-8859-1");;
     }
     
     public function getPasswordChange()
