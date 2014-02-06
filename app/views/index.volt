@@ -23,7 +23,7 @@
 	<body>
             <div id="main-wrapper">
                 <header id="header" class=" nav gradient-top">
-                    <img id="logo" class="float-left" src="/public/img/sharpframelogo.png" />
+                    <a href="/"><img id="logo" class="float-left" src="/public/img/sharpframelogo.png" /></a>
                     <div id="slogan" class="Orbitron-Font float-left">Sharp Frame</div>
                     <div id="searchbox" class="float-right">
                         <input type="textbox" name="search" />
