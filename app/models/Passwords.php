@@ -53,12 +53,23 @@ class Passwords extends \Phalcon\Mvc\Collection
     public function setPasswordChange($datetime)
     {
         //Converting it to UTF-8 to prevent errors with MongoDB
-        $this->setPasswordChange = mb_convert_encoding($datetime, "UTF-8", "ISO-8859-1");;
+        $this->passwordChange = mb_convert_encoding($datetime, "UTF-8", "ISO-8859-1");
     }
     
     public function getPasswordChange()
     {
-        return $this->setPasswordChange;
+        return $this->passwordChange;
+    }
+    
+    public function setLastLogin($datetime)
+    {
+        //Converting it to UTF-8 to prevent errors with MongoDB
+        $this->lastLogin = mb_convert_encoding($datetime, "UTF-8", "ISO-8859-1");
+    }
+    
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
     }
 }
 
