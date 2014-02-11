@@ -8,11 +8,6 @@ use Phalcon\DI\FactoryDefault,
 	Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter,
 	Phalcon\Session\Adapter\Files as SessionAdapter;
 
-$time = microtime();
-$time = explode(' ', $time);
-$time = $time[1] + $time[0];
-$start = $time;
-
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
