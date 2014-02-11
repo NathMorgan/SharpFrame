@@ -32,24 +32,29 @@ class Account {
         
     }
     
-    function Register($username, $password, $email, $datetime)
+    function Register($username, $passwordin, $email, $dob)
     {
         $user = new Users();
+        $password = new Passwords();
+        
         $user->setUsername($username);
+        $user->setEmail($email);
+        $user->setDateOfBirth($dob);
+        $user->setDateTime(time());
         
         //Generating a random salt and converting it to UTF
         $salt = mb_convert_encoding(mcrypt_create_iv(64, MCRYPT_DEV_URANDOM), "UTF-8", "ISO-8859-1");;
         
         //Hashing the password with sha256 with a ranom salt the password and a random generated string value.
         //If the database is compromised they will need the random string in the code.
-        $hashedpassword = hash('sha256', $salt + $password);
+        $hashedpassword = hash('sha256', $salt . $passwordin);
         
-        $user->setPassword($hashedpassword);
-        $user->salt($salt);
-        $user->setEmail($email);
-        $user->setDateTime($datetime);
+        $password->setPassword($hashedpassword);
+        $password->setSalt($salt);
+        $password->setPasswordChange(time());
+        $password->setLastLogin(time());
         
-        if(!($user->save()))
+        if(!($user->save()) && !($password-save()))
             return false;
         
         return true;
