@@ -2,11 +2,11 @@
 class Passwords extends \Phalcon\Mvc\Collection 
 {
     
-    private $_Userid;
-    private $password;
-    private $salt;
-    private $passwordchange;
-    private $lastlogin;
+    public $_Userid;
+    public $password;
+    public $salt;
+    public $passwordchange;
+    public $lastlogin;
     
     public function initialize()
     {

@@ -1,9 +1,9 @@
 <?php
 class RoomsXTags extends \Phalcon\Mvc\Collection
 {
-    private $_id;
-    private $Roomid;
-    private $Tagid;
+    public $_id;
+    public $Roomid;
+    public $Tagid;
     
     public function initialize()
     {

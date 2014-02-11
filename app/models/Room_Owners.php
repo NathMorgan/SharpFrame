@@ -2,9 +2,9 @@
 
 class Room_Owners extends \Phalcon\Mvc\Collection
 {
-    private $_Room_Ownerid;
-    private $Userid;
-    private $Roomid;
+    public $_Room_Ownerid;
+    public $Userid;
+    public $Roomid;
     
     public function initialize()
     {

@@ -1,10 +1,10 @@
 <?php
 class Suspended_Users extends \Phalcon\Mvc\Collection
 {
-    private $_Userid;
-    private $Reason;
-    private $StartDate;
-    private $EndDate;
+    public $_Userid;
+    public $Reason;
+    public $StartDate;
+    public $EndDate;
     
     public function initialize()
     {

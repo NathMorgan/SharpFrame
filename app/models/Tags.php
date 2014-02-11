@@ -1,8 +1,8 @@
 <?php
 class Tags extends \Phalcon\Mvc\Collection
 {
-    private $_id;
-    private $Tag;
+    public $_id;
+    public $Tag;
     
     public function initialize()
     {

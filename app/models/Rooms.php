@@ -1,10 +1,10 @@
 <?php
 class Rooms extends \Phalcon\Mvc\Collection
 {
-    private $_id;
-    private $RoomName;
-    private $Discription;
-    private $RoomIcon;
+    public $_id;
+    public $RoomName;
+    public $Discription;
+    public $RoomIcon;
     
     public function initialize()
     {

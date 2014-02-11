@@ -2,11 +2,11 @@
 
 class Users extends \Phalcon\Mvc\Collection
 {
-    private $_id;
-    private $username;
-    private $email;
-    private $dateofbirth;
-    private $datetime;
+    public $_id;
+    public $username;
+    public $email;
+    public $dateofbirth;
+    public $datetime;
     
     public function initialize()
     {
