@@ -31,7 +31,7 @@ class Passwords extends \Phalcon\Mvc\Collection
         //Converting it to UTF-8 to prevent errors with MongoDB
         $this->password = mb_convert_encoding($hashedpassword, "UTF-8", "ISO-8859-1");
         
-        setSalt($salt);
+        $this->setSalt($salt);
     }
     
     public function getPassword()
