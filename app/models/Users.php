@@ -13,6 +13,11 @@ class Users extends \Phalcon\Mvc\Collection
         $this->useImplicitObjectIds(false);
     }
     
+    public function getid()
+    {
+        return $this->_id;
+    }
+    
     public function setUsername($username)
     {
         //Username must be more then 3 characters
