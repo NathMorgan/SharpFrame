@@ -31,17 +31,22 @@
                     </div>
                 </header>
                 <div id="maincontent">
-                    <div id="side-navigation" class="float-left gradient-top hide">
-                        <div id="exit-navigation" class="float-right">X</div>
-                        <div id="navigation-title" class="float-left Orbitron-Font">Navigation</div>
-                        <ul>
-                            <li><a href="/account/register/">Register</a></li>
-                            <li><a href="/account/login">Login</a></li>
-                            <li><a href="/search/">Search</a></li>
-                        </ul>
+                    <div id="navwraper">
+                        <div id="side-navigation" class="float-left gradient-top hide">
+                            <div id="exit-navigation" class="float-right">X</div>
+                            <div id="navigation-title" class="float-left Orbitron-Font">Navigation</div>
+                            <ul>
+                                <li><a href="/account/register/">Register</a></li>
+                                <li><a href="/account/login">Login</a></li>
+                                <li><a href="/search/">Search</a></li>
+                            </ul>
+                        </div>
+                        <div id="navigationswitch" class="gradient-top">S<br />h<br />o<br />w<br /> <br />N<br />a<br />v<br /></div>
+                        <div class="clrfloats"></div>
                     </div>
-                    <div id="navigationswitch" class="gradient-top">S<br />h<br />o<br />w<br /> <br />N<br />a<br />v<br /></div>
-                    {{ content() }}
+                    <div id="contentwraper">
+                        {{ content() }}
+                    </div>
                 </div>
                 <div id="push"></div>
             </div>
