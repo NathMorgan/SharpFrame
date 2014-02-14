@@ -66,6 +66,7 @@ body, html, #main-wrapper{
 }
 
 #side-navigation{
+    border-right: 5px solid blue;
     height: 100%;
     width: 200px;
 }
@@ -85,7 +86,62 @@ body, html, #main-wrapper{
     border-bottom: 5px solid blue;
     width: 20px;
     line-height: 13px;
-    height: 105px; 
+    height: 105px;
+}
+
+#navwraper{
+    height: 100%;
+    float: left;
+}
+
+#contentwraper{
+    float: left;
+    height: 100%;
+    width: 88%;
+}
+
+/* Index CSS */
+
+#roomlistwrapper{
+    width: 86%;
+    height: 90%;
+    background-color: red;
+    float: left;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+/* Login CSS */
+
+#loginwrapper{
+    border: 5px solid blue;
+    width: 350px;
+    height: 180px;
+    margin: auto;
+    text-align: center;
+    margin-top: 150px;
+}
+
+#loginwrapper h2{
+    padding-top: 0px;
+    margin-top: 15px
+}
+
+
+/* Register CSS */
+
+#registerwrapper{
+    border: 5px solid blue;
+    width: 350px;
+    height: 250px;
+    margin: auto;
+    text-align: center;
+    margin-top: 150px;
+}
+
+#registerwrapper h2{
+    padding-top: 0px;
+    margin-top: 15px
 }
 
 /* CSS Classes */
@@ -112,7 +168,11 @@ body, html, #main-wrapper{
 }
 
 .float-right::after{
-    clear: both
+    clear: both;
+}
+
+.clrfloats{
+    clear: both;
 }
 
 .gradient-top{
