@@ -6,7 +6,7 @@
         <label for="email">E-mail:</label>
         {{ email_field("email") }} <br />
         <label for="dob">Date of birth:</label>
-        <input type="date" id="dob"> <br />
+        <input type="date" id="dob" name="dob"> <br />
         <label for="password">Password:</label>
         {{ password_field("password") }} <br />
         <label for="repassword">Re-enter Password:</label>
