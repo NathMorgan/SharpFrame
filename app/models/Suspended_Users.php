@@ -1,7 +1,7 @@
 <?php
 class Suspended_Users extends \Phalcon\Mvc\Collection
 {
-    public $_Userid;
+    public $Userid;
     public $Reason;
     public $StartDate;
     public $EndDate;
@@ -9,6 +9,16 @@ class Suspended_Users extends \Phalcon\Mvc\Collection
     public function initialize()
     {
         $this->useImplicitObjectIds(false);
+    }
+    
+    public function setUserid($id)
+    {
+        $this->Userid = $id;
+    }
+    
+    public function getUserid()
+    {
+        return $this->Userid;
     }
     
     public function setReason($reason)
