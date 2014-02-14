@@ -11,6 +11,11 @@ class Room_Owners extends \Phalcon\Mvc\Collection
         $this->useImplicitObjectIds(false);
     }
     
+    public function getRoomOwnerid()
+    {
+        return $this->_Room_Ownerid;
+    }
+    
     public function setUserid($userid)
     {
         $this->Userid = mb_convert_encoding($userid, "UTF-8", "ISO-8859-1");
