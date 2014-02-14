@@ -2,15 +2,25 @@
 class Passwords extends \Phalcon\Mvc\Collection 
 {
     
-    public $_Userid;
+    public $Userid;
     public $password;
     public $salt;
-    public $passwordchange;
-    public $lastlogin;
+    public $passwordChange;
+    public $lastLogin;
     
     public function initialize()
     {
         $this->useImplicitObjectIds(false);
+    }
+    
+    public function setUserid($id)
+    {
+        $this->Userid = $id;
+    }
+    
+    public function getUserid()
+    {
+        return $this->Userid;
     }
     
     public function setPassword($password)
