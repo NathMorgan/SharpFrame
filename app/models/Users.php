@@ -60,7 +60,7 @@ class Users extends \Phalcon\Mvc\Collection
     public function setDateOfBirth($dob)
     {
         //Converting it to UTF-8 to prevent errors with MongoDB
-        $this->datetime = mb_convert_encoding($dob, "UTF-8", "ISO-8859-1");
+        $this->dateofbirth = $dob;
     }
     
     public function getDateOfBirth()
@@ -71,7 +71,7 @@ class Users extends \Phalcon\Mvc\Collection
     public function setDateTime($datetime)
     {
         //Converting it to UTF-8 to prevent errors with MongoDB
-        $this->dateofbirth = mb_convert_encoding($datetime, "UTF-8", "ISO-8859-1");
+        $this->datetime = $datetime;
     }
     
     public function getDateTime()
