@@ -9,6 +9,11 @@ class Tags extends \Phalcon\Mvc\Collection
         $this->useImplicitObjectIds(false);
     }
     
+    public function getid()
+    {
+        return $this->_id;
+    }
+    
     public function setTag($tag)
     {
         $this->Tag = mb_convert_encoding($tag, "UTF-8", "ISO-8859-1");
