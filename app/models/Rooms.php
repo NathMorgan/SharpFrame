@@ -11,6 +11,11 @@ class Rooms extends \Phalcon\Mvc\Collection
         $this->useImplicitObjectIds(false);
     }
     
+    public function getid()
+    {
+        return $this->_id;
+    }
+    
     public function setRoomName($name)
     {
         $this->RoomName = mb_convert_encoding($name, "UTF-8", "ISO-8859-1");
