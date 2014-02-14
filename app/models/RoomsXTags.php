@@ -10,6 +10,11 @@ class RoomsXTags extends \Phalcon\Mvc\Collection
         $this->useImplicitObjectIds(false);
     }
     
+    public function getid()
+    {
+        return $this->_id;
+    }
+    
     public function setRoomid($roomid)
     {
         $this->Roomid = mb_convert_encoding($roomid, "UTF-8", "ISO-8859-1");
