@@ -31,17 +31,7 @@ class Passwords extends \Phalcon\Mvc\Collection
             throw new \InvalidArgumentException('password is too short');
         }
         
-        //Generating a random salt and converting it to UTF
-        $salt = mb_convert_encoding(mcrypt_create_iv(64, MCRYPT_DEV_URANDOM), "UTF-8", "ISO-8859-1");;
-        
-        //Hashing the password with sha256 with a ranom salt the password and a random generated string value.
-        //If the database is compromised they will need the random string in the code.
-        $hashedpassword = hash('sha256', $salt + $password);
-        
-        //Converting it to UTF-8 to prevent errors with MongoDB
-        $this->password = mb_convert_encoding($hashedpassword, "UTF-8", "ISO-8859-1");
-        
-        $this->setSalt($salt);
+        $this->password = $password;
     }
     
     public function getPassword()
@@ -51,8 +41,7 @@ class Passwords extends \Phalcon\Mvc\Collection
     
     public function setSalt($salt)
     {
-        //Converting it to UTF-8 to prevent errors with MongoDB
-        $this->salt = mb_convert_encoding($salt, "UTF-8", "ISO-8859-1");
+        $this->salt = $salt;
     }
     
     public function getSalt()
