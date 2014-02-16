@@ -4,7 +4,7 @@ class Account {
     
     private $error;
     
-    function Login($username, $password)
+    function Login($username, $passwordin)
     {
         //Trying to find a username that is provided by the user when logging in
         //If failed then return a login failed no need to check for password
@@ -19,7 +19,7 @@ class Account {
         }
         
         $password = Passwords::findFirst(array(
-            array("Userid" => $user->getid())
+            array("Userid" => (string)$user->getid())
         ));
 
         //Cant find password this should not happen but is here just incase something bad happens
@@ -34,12 +34,11 @@ class Account {
         
         //Hashing the password entered by the user then checking if it is the same in the database
         //If failed then return a login failed
-        $hashedpassword = hash('sha256', $salt + $password);
+        $hashedpassword = hash('sha256', $salt . $passwordin);
         
         if($dbpassword != $hashedpassword)
         {
             $this->error = array("login" => "Password is incorrect");
-            ChromePhp::log($this->error);
             return false;
         }
         
@@ -66,7 +65,7 @@ class Account {
         //If the database is compromised they will need the random string in the code.
         $hashedpassword = hash('sha256', $salt . $passwordin);
         
-        $password->setUserid($user->getid());
+        $password->setUserid((string)$user->getid());
         $password->setPassword($hashedpassword);
         $password->setSalt($salt);
         $password->setPasswordChange(microtime());
@@ -95,7 +94,7 @@ class Account {
     
     function GetError()
     {
-        return $error;
+        return $this->error;
     }
 }
 
