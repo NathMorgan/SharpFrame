@@ -16,10 +16,14 @@ class AccountController extends ControllerBase
             
             $account = new Account();
             
-            if($account->Register($this->request->getPost("username"), $this->request->getPost("password"), $this->request->getPost("email"), time()))
+            if($account->Register($this->request->getPost("username"), $this->request->getPost("password"), $this->request->getPost("email"), $this->request->getPost("dob")))
+            {
                 $this->view->title = "worked";
+            }
             else
+            {
                 $this->view->title = "failed";
+            }
             
         }
     }
@@ -27,6 +31,22 @@ class AccountController extends ControllerBase
     public function LoginAction()
     {
         $this->view->title = "Login";
+        
+        //Checking if a post request was sent
+        if ($this->request->isPost() == true) {
+            
+            $account = new Account();
+            
+            if($account->Login($this->request->getPost("username"), $this->request->getPost("password")))
+            {
+                $this->view->title = "worked";
+            }
+            else
+            {
+                $this->view->title = "failed";
+            }
+            
+        }
     }
     
     public function LogoutAction()
