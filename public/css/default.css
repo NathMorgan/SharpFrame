@@ -132,7 +132,7 @@ body, html, #main-wrapper{
 
 #registerwrapper{
     border: 5px solid blue;
-    width: 350px;
+    width: 290px;
     height: 250px;
     margin: auto;
     text-align: center;
@@ -142,6 +142,16 @@ body, html, #main-wrapper{
 #registerwrapper h2{
     padding-top: 0px;
     margin-top: 15px
+}
+
+#labels{
+    float: left;
+    text-align: right;
+    line-height: 26.5px;
+}
+
+#inputs{
+    float: right;
 }
 
 /* CSS Classes */
