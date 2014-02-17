@@ -4,7 +4,7 @@ class Account {
     
     private $error;
     
-    function Login($username, $passwordin)
+    function Login($username, $passwordin, $remember, $ip)
     {
         //Trying to find a username that is provided by the user when logging in
         //If failed then return a login failed no need to check for password
@@ -41,6 +41,38 @@ class Account {
             $this->error = array("login" => "Password is incorrect");
             return false;
         }
+        
+        $key = hash('sha256', microtime() + $username + "Pa602JnVdrgMnbvzkfmC");
+        
+        $sessionkey = hash('sha256', $ip . $key);
+        
+        $session = new Sessions();
+        
+        $session->setUserid((string)$user->getid());
+        $session->setSessionkey($sessionkey);
+        
+        if(!($session->save()))
+            return false;
+        
+        if($remember == "on")
+        {
+            $cookie = new \Phalcon\Http\Cookie(
+                    'Session_Key',
+                    $sessionkey,
+                    time()+60*60*24*6004,
+                    '/',
+                    'sharpframe.co.uk'
+                    );
+            if($cookie->send())
+                ChromePhp::log ("Cookie sent");
+            else
+                ChromePhp::log ("Cookie Error");
+        }
+        
+        $session = new \Phalcon\Session\Bag('Session');
+        $session->type = "Session";
+        $session->Key = $sessionkey;
+        $session->Username = $username;
         
         return true;
     }
@@ -87,7 +119,7 @@ class Account {
         
     }
     
-    static function Authenticate($ip, $cookie = "")
+    static function Authenticate($ip, $sessionkey)
     {
         
     }
