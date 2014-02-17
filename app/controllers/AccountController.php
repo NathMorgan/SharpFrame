@@ -18,7 +18,8 @@ class AccountController extends ControllerBase
             
             if($account->Register($this->request->getPost("username"), $this->request->getPost("password"), $this->request->getPost("email"), $this->request->getPost("dob")))
             {
-                $this->view->title = "worked";
+                $this->response->redirect("");
+                $this->view->disable();
             }
             else
             {
@@ -37,7 +38,7 @@ class AccountController extends ControllerBase
             
             $account = new Account();
             
-            if($account->Login($this->request->getPost("username"), $this->request->getPost("password")))
+            if($account->Login($this->request->getPost("username"), $this->request->getPost("password"), $this->request->getPost("remember"), $this->request->getClientAddress()))
             {
                 $this->view->title = "worked";
             }
