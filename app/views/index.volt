@@ -38,6 +38,7 @@
                             <ul>
                                 <li><a href="/account/register/">Register</a></li>
                                 <li><a href="/account/login">Login</a></li>
+                                <li><a href="/room/register">New Room</a></li>
                                 <li><a href="/search/">Search</a></li>
                             </ul>
                         </div>
