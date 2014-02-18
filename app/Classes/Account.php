@@ -69,7 +69,7 @@ class Account {
                 ChromePhp::log ("Cookie Error");
         }
         
-        $session = new \Phalcon\Session\Bag('Session');
+        $session = new \Phalcon\Session\Bag('Session_Key');
         $session->type = "Session";
         $session->Key = $sessionkey;
         $session->Username = $username;
@@ -109,19 +109,62 @@ class Account {
         return true;
     }
     
-    function ResetPassword($newpassword, $oldpassword)
+    function ResetPassword($userid, $newpassword)
+    {
+        $user = $this->GetUser($userid);
+        
+        if($user == false)
+            return false;
+            
+       $user->setPassword($newpassword);
+    }
+    
+    function ChangeEmail($usrid, $email)
     {
         
     }
     
-    function ChangeEmail($email)
+    static function Authenticate($ip)
     {
+        $cookie = new \Phalcon\Http\Cookie();
+        $session = new \Phalcon\Session\Bag();
         
+        if($session->has('Session_Key'))
+            $session = $session->get('Session_Key');
+        else if($cookie->has('Session_Key'))
+            $session = $cookie->get('Session_Key');
+        else
+        {
+            ChromePhp::log("No cookie or session found");
+            return false;
+        }
+        
+        $sessionkey = hash('sha256', $ip . $key);
+        
+        $session = Session::findFirst(array(
+            array("sessionkey" => $sessionkey)
+        ));
+        
+        if($session == null)
+        {
+            $this->error = array("login" => "Username is invalid");
+            return 0;
+        }
     }
     
-    static function Authenticate($ip, $sessionkey)
+    static function GetUser($userid)
     {
+        $user = Users::findFirst(array(
+            array("_id" => $userid)
+        ));
         
+        if($user == null)
+        {
+            $this->error = array("login" => "Username is invalid");
+            return false;
+        }
+        
+        return $user;
     }
     
     function GetError()
