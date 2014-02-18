@@ -61,7 +61,7 @@ class Account {
         {
             $cookie = new \Phalcon\Http\Cookie(
                     'Session_Key',
-                    $sessionkey,
+                    $key,
                     time()+60*60*24*6004,
                     '/',
                     'sharpframe.co.uk'
@@ -75,7 +75,7 @@ class Account {
         //Creating a session by default even if a cookie is made.
         $session = new \Phalcon\Session\Bag('Session_Key');
         $session->type = "Session";
-        $session->Key = $sessionkey;
+        $session->Key = $key;
         $session->Username = $username;
         
         return true;
@@ -133,35 +133,32 @@ class Account {
     static function Authenticate($ip)
     {
         //Creating pointers to the cookie and session classes
-        $cookie = new \Phalcon\Http\Cookie();
-        $session = new \Phalcon\Session\Bag();
+        $cookie = new \Phalcon\Http\Cookie('Session_Key');
+        $session = new \Phalcon\Session\Bag('Session_Key');
         
         //Since a session will allways be created even with a cookie the session will be checked fist then the cookie. If the cookie returns true then a session will be created. If all else
         //fails then there is no cookie or session and the user is not logged in.
-        if($session->has('Session_Key'))
-            $key = $session->get('Session_Key');
-        else if($cookie->has('Session_Key'))
-            $key = $cookie->get('Session_Key');
+        if(isset($session))
+            $key = $session->Key;
+        else if(isset($cookie))
+            $key = $cookie->getValue();
         else
-        {
-            ChromePhp::log("No cookie or session found");
-            return false;
-        }
+            return 0;
         
         //Hashing the ip and key that is stored in the cookie or session, if the users ip changes then the user will have to login again. 
         $sessionkey = hash('sha256', $ip . $key);
         
-        $session = Session::findFirst(array(
+        $session = Sessions::findFirst(array(
             array("sessionkey" => $sessionkey)
         ));
         
         if($session == null)
         {
-            $this->error = array("login" => "Username is invalid");
+            ChromePhp::log ("Cant find session");
             return 0;
         }
         
-        
+        return $session->getUserid();
     }
     
     static function GetUser($userid)
@@ -172,7 +169,7 @@ class Account {
         
         if($user == null)
         {
-            $this->error = array("login" => "Username is invalid");
+            $this->error = ["login" => "Username is invalid"];
             return false;
         }
         
