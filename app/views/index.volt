@@ -54,6 +54,7 @@
             <footer class="gradient-bottom nav text-center">
                 <a href="http://tuqiri.net" class="fix-hrefs">Tuqiri.net</a><br />
                 &copy; Nathan Morgan <br />
+                <a href="">Contact</a> <a href="">Site Map</a> <a href="http://blog.sharpframe.co.uk">Blog</a> <a href="https://github.com/Tuqiri/SharpFrame">Git Hub</a>
             </footer>
 	</body>
 </html>
