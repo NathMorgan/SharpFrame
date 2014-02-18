@@ -42,10 +42,12 @@ class Account {
             return false;
         }
         
+        //Generating the key that will be stored in the cookie or session
         $key = hash('sha256', microtime() + $username + "Pa602JnVdrgMnbvzkfmC");
         
         $sessionkey = hash('sha256', $ip . $key);
         
+        //Adding the session to the database with a link to the user.
         $session = new Sessions();
         
         $session->setUserid((string)$user->getid());
@@ -54,6 +56,7 @@ class Account {
         if(!($session->save()))
             return false;
         
+        //If the user selected that he wishs to be remembered when logging it a cookie will be made and stored.
         if($remember == "on")
         {
             $cookie = new \Phalcon\Http\Cookie(
@@ -69,6 +72,7 @@ class Account {
                 ChromePhp::log ("Cookie Error");
         }
         
+        //Creating a session by default even if a cookie is made.
         $session = new \Phalcon\Session\Bag('Session_Key');
         $session->type = "Session";
         $session->Key = $sessionkey;
@@ -82,6 +86,7 @@ class Account {
         $user = new Users();
         $password = new Passwords();
         
+        //Adding users details to the database
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setDateOfBirth($dob);
@@ -97,6 +102,7 @@ class Account {
         //If the database is compromised they will need the random string in the code.
         $hashedpassword = hash('sha256', $salt . $passwordin);
         
+        //Adding password details to the database
         $password->setUserid((string)$user->getid());
         $password->setPassword($hashedpassword);
         $password->setSalt($salt);
@@ -126,19 +132,23 @@ class Account {
     
     static function Authenticate($ip)
     {
+        //Creating pointers to the cookie and session classes
         $cookie = new \Phalcon\Http\Cookie();
         $session = new \Phalcon\Session\Bag();
         
+        //Since a session will allways be created even with a cookie the session will be checked fist then the cookie. If the cookie returns true then a session will be created. If all else
+        //fails then there is no cookie or session and the user is not logged in.
         if($session->has('Session_Key'))
-            $session = $session->get('Session_Key');
+            $key = $session->get('Session_Key');
         else if($cookie->has('Session_Key'))
-            $session = $cookie->get('Session_Key');
+            $key = $cookie->get('Session_Key');
         else
         {
             ChromePhp::log("No cookie or session found");
             return false;
         }
         
+        //Hashing the ip and key that is stored in the cookie or session, if the users ip changes then the user will have to login again. 
         $sessionkey = hash('sha256', $ip . $key);
         
         $session = Session::findFirst(array(
@@ -150,6 +160,8 @@ class Account {
             $this->error = array("login" => "Username is invalid");
             return 0;
         }
+        
+        
     }
     
     static function GetUser($userid)
