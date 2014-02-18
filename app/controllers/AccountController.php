@@ -9,6 +9,13 @@ class AccountController extends ControllerBase
     
     public function RegisterAction()
     {
+        //Checking if there is already a vailid session if so redirect back to homepage
+        if(Account::Authenticate($this->request->getClientAddress()) != 0)
+        {
+            $this->response->redirect("");
+            $this->view->disable();
+        }
+        
         $this->view->title = "Register";
         
         //Checking if a post request was sent
@@ -32,6 +39,13 @@ class AccountController extends ControllerBase
     
     public function LoginAction()
     {
+        //Checking if there is already a vailid session if so redirect back to homepage
+        if(Account::Authenticate($this->request->getClientAddress()) != 0)
+        {
+            $this->response->redirect("");
+            $this->view->disable();
+        }
+        
         $this->view->title = "Login";
         
         //Checking if a post request was sent
@@ -42,7 +56,8 @@ class AccountController extends ControllerBase
             
             if($account->Login($this->request->getPost("username"), $this->request->getPost("password"), $this->request->getPost("remember"), $this->request->getClientAddress()))
             {
-                $this->view->title = "worked";
+                $this->response->redirect("");
+                $this->view->disable();
             }
             else
             {
