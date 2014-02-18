@@ -4,7 +4,7 @@ class AccountController extends ControllerBase
 {
     public function indexAction()
     {
-        
+        $this->view->title = "Account";
     }
     
     public function RegisterAction()
@@ -12,7 +12,8 @@ class AccountController extends ControllerBase
         $this->view->title = "Register";
         
         //Checking if a post request was sent
-        if ($this->request->isPost() == true) {
+        if ($this->request->isPost() == true)
+        {
             
             $account = new Account();
             
@@ -34,7 +35,8 @@ class AccountController extends ControllerBase
         $this->view->title = "Login";
         
         //Checking if a post request was sent
-        if ($this->request->isPost() == true) {
+        if ($this->request->isPost() == true)
+        {
             
             $account = new Account();
             
@@ -57,11 +59,19 @@ class AccountController extends ControllerBase
     
     public function EditAction()
     {
+         //Checking if a post request was sent
+        if ($this->request->isPost() == true)
+        {
         
+        }
     }
     
     public function ForgotPasswordAction()
     {
-        
+         //Checking if a post request was sent
+        if ($this->request->isPost() == true)
+        {
+            
+        }
     }
 }
