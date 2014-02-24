@@ -94,6 +94,31 @@ body, html, #main-wrapper{
     float: left;
 }
 
+#navwraper ul{
+    margin: 0px;
+    margin-top: 40px;
+    padding: 0px;
+}
+
+#navwraper ul li{
+    list-style-type: none;
+    text-align: center;
+}
+
+#navwraper ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+}
+
+#navwraper ul li a:hover{
+    color: blue;
+}
+#navwraper ul li a:active{
+    color: white;
+}
+
+
 #contentwraper{
     float: left;
     height: 100%;
