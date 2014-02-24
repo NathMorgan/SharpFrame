@@ -10,7 +10,7 @@ class AccountController extends ControllerBase
     public function RegisterAction()
     {
         //Checking if there is already a vailid session if so redirect back to homepage
-        if(Account::Authenticate($this->request->getClientAddress()) != 0)
+        if(Account::Authenticate($this->request->getClientAddress()) != null)
         {
             $this->response->redirect("");
             $this->view->disable();
@@ -40,7 +40,7 @@ class AccountController extends ControllerBase
     public function LoginAction()
     {
         //Checking if there is already a vailid session if so redirect back to homepage
-        if(Account::Authenticate($this->request->getClientAddress()) != 0)
+        if(Account::Authenticate($this->request->getClientAddress()) != null)
         {
             $this->response->redirect("");
             $this->view->disable();
