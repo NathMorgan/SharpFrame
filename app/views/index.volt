@@ -28,6 +28,7 @@
                     <div id="searchbox" class="float-right">
                         <input type="textbox" name="search" />
                         <img id="exit-nav" class="float-right" src="/public/img/search.png" />
+                        <div id="welcome">Welcome - {% if username == null %} Guest {% else %} <a href="/user/{{username}}" class="fix-url">{{username}}</a> {% endif %}</div>
                     </div>
                 </header>
                 <div id="maincontent">
@@ -36,10 +37,11 @@
                             <div id="exit-navigation" class="float-right">X</div>
                             <div id="navigation-title" class="float-left Orbitron-Font">Navigation</div>
                             <ul>
-                                <li><a href="/account/register/">Register</a></li>
-                                <li><a href="/account/login">Login</a></li>
-                                <li><a href="/room/register">New Room</a></li>
-                                <li><a href="/search/">Search</a></li>
+                                <li><a href="/account/register/" class="fix-url">Register</a></li>
+                                <li><a href="/account/login" class="fix-url">Login</a></li>
+                                <li><a href="/room/register" class="fix-url">New Room</a></li>
+                                <li><a href="/search/" class="fix-url">Search</a></li>
+                                <li><a href="/logout/" class="fix-url">Logout</a></li>
                             </ul>
                         </div>
                         <div id="navigationswitch" class="gradient-top">S<br />h<br />o<br />w<br /> <br />N<br />a<br />v<br /></div>
