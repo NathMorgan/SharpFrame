@@ -74,9 +74,7 @@ class Account {
         
         //Creating a session by default even if a cookie is made.
         $session = new \Phalcon\Session\Bag('Session_Key');
-        $session->type = "Session";
         $session->Key = $key;
-        $session->Username = $username;
         
         return true;
     }
@@ -133,17 +131,17 @@ class Account {
     static function Authenticate($ip)
     {
         //Creating pointers to the cookie and session classes
-        $cookie = new \Phalcon\Http\Cookie('Session_Key');
-        $session = new \Phalcon\Session\Bag('Session_Key');
+        $cookieobj = new \Phalcon\Http\Cookie('Session_Key');
+        $sessionobj = new \Phalcon\Session\Bag('Session_Key');
         
         //Since a session will allways be created even with a cookie the session will be checked fist then the cookie. If the cookie returns true then a session will be created. If all else
         //fails then there is no cookie or session and the user is not logged in.
-        if(isset($session))
-            $key = $session->Key;
-        else if(isset($cookie))
-            $key = $cookie->getValue();
+        if(isset($sessionobj))
+            $key = $sessionobj->Key;
+        else if(isset($cookieobj))
+            $key = $cookieobj->getValue();
         else
-            return 0;
+            return null;
         
         //Hashing the ip and key that is stored in the cookie or session, if the users ip changes then the user will have to login again. 
         $sessionkey = hash('sha256', $ip . $key);
@@ -155,16 +153,28 @@ class Account {
         if($session == null)
         {
             ChromePhp::log ("Cant find session");
-            return 0;
+            return null;
         }
         
-        return $session->getUserid();
+        $user = Users::findFirst(
+            array("_id" => array("ObjectId" => "4e209564203d83940f000006"))
+        );
+        
+        if($user == null)
+        {
+            ChromePhp::log("This did not work");
+            return null;
+        }
+        
+        $sessionobj->username = $user->username;
+        
+        return $user->_id;
     }
     
     static function GetUser($userid)
     {
         $user = Users::findFirst(array(
-            array("_id" => $userid)
+            array("_id" => ObjectId($userid))
         ));
         
         if($user == null)
