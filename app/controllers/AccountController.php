@@ -10,7 +10,7 @@ class AccountController extends ControllerBase
     public function RegisterAction()
     {
         //Checking if the user is not logged in if so redirect back to homepage
-        if($authenticated)
+        if($this->authenticated)
         {
             $this->response->redirect("");
             $this->view->disable();
@@ -40,7 +40,7 @@ class AccountController extends ControllerBase
     public function LoginAction()
     {
         //Checking if the user is not logged in if so redirect back to homepage
-        if($authenticated)
+        if($this->authenticated)
         {
             $this->response->redirect("");
             $this->view->disable();
@@ -70,7 +70,7 @@ class AccountController extends ControllerBase
     public function LogoutAction()
     {
         //Checking if the user is logged in if not redirect back to homepage
-        if(!$authenticated)
+        if(!$this->authenticated)
         {
             $this->response->redirect("");
             $this->view->disable();
@@ -86,7 +86,7 @@ class AccountController extends ControllerBase
     public function EditAction()
     {
         //Checking if the user is logged in if not redirect back to homepage
-        if(!$authenticated)
+        if(!$this->authenticated)
         {
             $this->response->redirect("");
             $this->view->disable();
@@ -102,7 +102,7 @@ class AccountController extends ControllerBase
     public function ForgotPasswordAction()
     {
         //Checking if the user is logged in if not redirect back to homepage
-        if(!$authenticated)
+        if(!$this->authenticated)
         {
             $this->response->redirect("");
             $this->view->disable();
