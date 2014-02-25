@@ -50,6 +50,12 @@ body, html, #main-wrapper{
     margin-right: 2px;
 }
 
+#welcome{
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 #footer{
     border-top: 5px solid blue;
 }
@@ -106,18 +112,8 @@ body, html, #main-wrapper{
 }
 
 #navwraper ul li a{
-    text-decoration: none;
-    color: black;
     font-size: 25px;
 }
-
-#navwraper ul li a:hover{
-    color: blue;
-}
-#navwraper ul li a:active{
-    color: white;
-}
-
 
 #contentwraper{
     float: left;
@@ -198,6 +194,18 @@ body, html, #main-wrapper{
 }
 
 /* CSS Classes */
+
+.fix-url{
+    text-decoration: none;
+    color: black;
+}
+
+.fix-url:hover{
+    color: blue;
+}
+.fix-url:active{
+    color: white;
+}
 
 .Orbitron-Font{
     font-family: 'Orbitron', sans-serif;
