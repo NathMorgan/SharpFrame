@@ -1,8 +1,8 @@
 <?php
 
-class Room_Owners extends \Phalcon\Mvc\Collection
+class RoomOwners extends \Phalcon\Mvc\Collection
 {
-    public $_Room_Ownerid;
+    public $_RoomOwnerid;
     public $Userid;
     public $Roomid;
     
@@ -13,12 +13,12 @@ class Room_Owners extends \Phalcon\Mvc\Collection
     
     public function getRoomOwnerid()
     {
-        return $this->_Room_Ownerid;
+        return $this->_RoomOwnerid;
     }
     
     public function setUserid($userid)
     {
-        $this->Userid = mb_convert_encoding($userid, "UTF-8", "ISO-8859-1");
+        $this->Userid = $userid;
     }
     
     public function getUserid()
@@ -28,7 +28,7 @@ class Room_Owners extends \Phalcon\Mvc\Collection
     
     public function setRoomid($roomid)
     {
-        $this->Roomid = mb_convert_encoding($roomid, "UTF-8", "ISO-8859-1");
+        $this->Roomid = $roomid;
     }
     
     public function getRoomid()
