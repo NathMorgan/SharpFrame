@@ -79,6 +79,40 @@ class Account {
         return true;
     }
     
+    function Logout($ip)
+    {
+        $cookieobj = new \Phalcon\Http\Cookie('Session_Key');
+        $sessionobj = new \Phalcon\Session\Bag('Session_Key');
+
+        if(isset($sessionobj))
+        {
+            $key = $sessionobj->Key;
+            $sessionobj->destroy();
+        }
+        else if(isset($cookieobj))
+        {
+            $key = $cookieobj->getValue();
+            $cookieobj->delete();
+            ChromePhp::log("deleted");
+        }
+        else
+            return false;
+        
+        $sessionkey = hash('sha256', $ip . $key);
+        
+        $session = Sessions::findFirst(array(
+            array("sessionkey" => $sessionkey)
+        ));
+        
+        //If the session was not found in the database then the database must of been cleaned and no need to continue
+        if($session == null)
+            return false;
+        
+        $session->delete();
+        
+        return true;
+    }
+    
     function Register($username, $passwordin, $email, $dob)
     {
         $user = new Users();
@@ -123,7 +157,7 @@ class Account {
        $user->setPassword($newpassword);
     }
     
-    function ChangeEmail($usrid, $email)
+    function ChangeEmail($userid, $email)
     {
         
     }
@@ -157,7 +191,7 @@ class Account {
         }
         
         $user = Users::findFirst(
-            array("_id" => array("ObjectId" => "4e209564203d83940f000006"))
+            array("_id" => array("ObjectId" => $session->userid))
         );
         
         if($user == null)
@@ -166,20 +200,22 @@ class Account {
             return null;
         }
         
-        $sessionobj->username = $user->username;
-        
-        return $user->_id;
+        return (string)$user->_id;
     }
     
     static function GetUser($userid)
     {
+        ChromePhp::log($userid);
+        
         $user = Users::findFirst(array(
-            array("_id" => ObjectId($userid))
-        ));
+            "_id" => array("ObjectId" => $userid)
+         ));
+        
+        ChromePhp::log($user);
         
         if($user == null)
         {
-            $this->error = ["login" => "Username is invalid"];
+            $this->error = array("GetUser" => "Userid is invalid");
             return false;
         }
         
