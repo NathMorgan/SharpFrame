@@ -19,7 +19,7 @@ class Rooms extends \Phalcon\Mvc\Collection
     
     public function setTitle($title)
     {
-        $this->RoomName = mb_convert_encoding($title, "UTF-8", "ISO-8859-1");
+        $this->title = $title;
     }
     
     public function getTitle()
@@ -29,12 +29,12 @@ class Rooms extends \Phalcon\Mvc\Collection
     
     public function setDiscription($discription)
     {
-        $this->Discription = mb_convert_encoding($discription, "UTF-8", "ISO-8859-1");
+        $this->discription = $discription;
     }
     
     public function getDiscription()
     {
-        return $this->Discription;
+        return $this->discription;
     }
     
     public function setVideoid($id)
@@ -49,12 +49,12 @@ class Rooms extends \Phalcon\Mvc\Collection
     
     public function setIcon($icon)
     {
-        $this->RoomIcon = mb_convert_encoding($icon, "UTF-8", "ISO-8859-1");
+        $this->icon = $icon;
     }
     
     public function getIcon()
     {
-        return $this->RoomIcon;
+        return $this->icon;
     }
 }
 
