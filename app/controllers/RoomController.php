@@ -19,7 +19,11 @@ class RoomController extends ControllerBase
         if ($this->request->isPost() == true)
         {
             $room = new Room();
-            $room->Register($this->request->getPost("title"), $this->request->getPost("description"), $this->request->getPost("youtubeurl"), $_FILES['icon'], $this->user->_id);
+            if($room->Register($this->request->getPost("title"), $this->request->getPost("description"), $this->request->getPost("youtubeurl"), $_FILES['icon'], (string)ControllerBase::getUser()->_id))
+            {
+                $this->response->redirect("");
+                $this->view->disable();
+            }
         }
         
         $this->view->title = "New Room";
