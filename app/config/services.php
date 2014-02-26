@@ -6,7 +6,8 @@ use Phalcon\DI\FactoryDefault,
 	Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter,
 	Phalcon\Mvc\View\Engine\Volt as VoltEngine,
 	Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter,
-	Phalcon\Session\Adapter\Files as SessionAdapter;
+	Phalcon\Session\Adapter\Files as SessionAdapter,
+        Phalcon\Mvc\Router as Router;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -21,6 +22,25 @@ $di->set('url', function() use ($config) {
 	$url->setBaseUri($config->application->baseUri);
 	return $url;
 }, true);
+
+/**
+ * Setting a custom route for the users
+ */
+$di->set('router', function() {
+    $router = new Router();
+    
+    $router->add("/user/:params", array(
+        'controller' => 'user',
+        'params' => 1,
+    ));
+    
+    $router->add("/logout/", array(
+        'controller' => 'account',
+        'action' => 'logout',
+    ));
+    
+    return $router;
+});
 
 /**
  * Setting up the view component
