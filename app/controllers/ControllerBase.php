@@ -15,14 +15,24 @@ class ControllerBase extends Controller
         
          if($userid != null)
          {
-             $authenticated = true;
-             $user = Account::GetUser($userid);
-             $this->view->username = ucfirst($user->username);
+             $this->authenticated = true;
+             $this->user = Account::GetUser($userid);
+             $this->view->username = ucfirst($this->user->username);
          }
          else
          {
-             $authenticated = false;
+             $this->authenticated = false;
              $this->view->username = "Guest";
          }
+    }
+    
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
+    public function getAuthenticated()
+    {
+        return $this->authenticated;
     }
 }
