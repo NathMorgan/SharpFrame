@@ -126,7 +126,6 @@ body, html, #main-wrapper{
 #roomlistwrapper{
     width: 86%;
     height: 90%;
-    background-color: red;
     float: left;
     margin-left: 30px;
     margin-top: 30px;
@@ -197,6 +196,22 @@ input[type="submit"]{
     margin-top: 20px;
 }
 /* CSS Classes */
+.roombox{
+    text-align: center;
+    width: 150px;
+    height: 150px;
+    float: left;
+    border: 5px solid blue;
+    margin-right: 25px;
+}
+
+.roomtitle{
+    font-size: 20px;
+}
+
+.roombox img{
+    width: 100px;
+}
 
 .fix-url{
     text-decoration: none;
@@ -286,9 +301,4 @@ input[type="submit"]{
 
 .text-left{
     text-align: left;
-}
-
-.fix-hrefs{
-    color: black;
-    text-decoration: none;
 }
