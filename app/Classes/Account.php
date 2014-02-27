@@ -182,7 +182,7 @@ class Account {
         
         $session = Sessions::findFirst(array(
             array("sessionkey" => $sessionkey)
-        ));
+        )); 
         
         if($session == null)
         {
@@ -190,9 +190,7 @@ class Account {
             return null;
         }
         
-        $user = Users::findFirst(
-            array("_id" => array("ObjectId" => $session->userid))
-        );
+        $user = Users::findById(new MongoId($session->userid));
         
         if($user == null)
         {
@@ -205,13 +203,7 @@ class Account {
     
     static function GetUser($userid)
     {
-        ChromePhp::log($userid);
-        
-        $user = Users::findFirst(array(
-            "_id" => array("ObjectId" => $userid)
-         ));
-        
-        ChromePhp::log($user);
+        $user = Users::findById(new MongoId($userid));
         
         if($user == null)
         {
