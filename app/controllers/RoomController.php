@@ -33,11 +33,10 @@ class RoomController extends ControllerBase
     {
         if(isset($roomid))
         {
-            $room = new room();
+            $room = new Room();
             $roomdetails = $room->getRoom($roomid);
-            $this->view->title = $roomdetails['name'];
+            $this->view->title = $roomdetails->title;
         }
-        $this->view->title = $roomid;
     }
 }
 
