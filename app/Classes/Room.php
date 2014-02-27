@@ -75,12 +75,22 @@ class Room
     
     public function getRoom($id)
     {
-        $room = Rooms::findFirst(array(
-            array("_id" => $id)
-        ));
+        $room = Rooms::findById(new MongoId($id));
+        
         if($room == null)
         {
             $this->error = "Room id is invalid";
+            return false;
+        }
+        return $room;
+    }
+    
+    public function getRooms()
+    {
+        $room = Rooms::find();
+        if($room == null)
+        {
+            $this->error = "No rooms created";
             return false;
         }
         return $room;
