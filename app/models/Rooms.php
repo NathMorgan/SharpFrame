@@ -5,6 +5,7 @@ class Rooms extends \Phalcon\Mvc\Collection
     public $title;
     public $discription;
     public $videoid;
+    public $ownerUsername;
     public $icon;
     
     public function initialize()
@@ -45,6 +46,16 @@ class Rooms extends \Phalcon\Mvc\Collection
     public function getVideoid()
     {
         return $this->videoid;
+    }
+    
+    public function setOwnerUsername($username)
+    {
+        $this->ownerUsername = $username;
+    }
+    
+    public function getOwnerUsername()
+    {
+        return $this->ownerUsername;
     }
     
     public function setIcon($icon)
