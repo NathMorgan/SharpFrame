@@ -6,6 +6,8 @@ class Rooms extends \Phalcon\Mvc\Collection
     public $discription;
     public $videoid;
     public $ownerUsername;
+    public $views;
+    public $connectedUsers;
     public $icon;
     
     public function initialize()
@@ -56,6 +58,26 @@ class Rooms extends \Phalcon\Mvc\Collection
     public function getOwnerUsername()
     {
         return $this->ownerUsername;
+    }
+    
+    public function setViews($views)
+    {
+        $this->views -> $views;
+    }
+    
+    public function getViews()
+    {
+        return $this->views;
+    }
+    
+    public function setConnectedUsers($connectedusers)
+    {
+        $this->connectedUsers -> $connectedusers;
+    }
+    
+    public function getConnectedUsers()
+    {
+        return $this->connectedUsers;
     }
     
     public function setIcon($icon)
