@@ -36,6 +36,7 @@ class RoomController extends ControllerBase
             $room = new Room();
             $roomdetails = $room->getRoom($roomid);
             $this->view->title = $roomdetails->title;
+            $this->view->room = $roomdetails;
         }
     }
 }
