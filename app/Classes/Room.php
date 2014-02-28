@@ -30,6 +30,8 @@ class Room
         //Moving the icon file from the temp location to the new location
         move_uploaded_file($iconfile['tmp_name'], "/var/www/sharpframe.co.uk/public_html/public/content/icons/".$iconfile['name']);
         
+        $user = Users::findById(new MongoId($userid));
+        
         //Adding the details to the database
         $room = new Rooms();
         $roomowner = new RoomOwners();
@@ -37,6 +39,9 @@ class Room
         $room->setTitle($title);
         $room->setDiscription($description);
         $room->setVideoid(array_shift($videoid));
+        $room->setOwnerUsername($user->username);
+        $room->setViews(0);
+        $room->setConnectedUsers(0);
         $room->setIcon($iconfile['name']);
         
         if(!($room->save()))
@@ -75,6 +80,7 @@ class Room
     
     public function getRoom($id)
     {
+        
         $room = Rooms::findById(new MongoId($id));
         
         if($room == null)
@@ -87,7 +93,11 @@ class Room
     
     public function getRooms()
     {
-        $room = Rooms::find();
+        $room = Rooms::find(array(
+            "sort" => array('_id' => -1),
+            "limit" => 50
+        ));
+        
         if($room == null)
         {
             $this->error = "No rooms created";
