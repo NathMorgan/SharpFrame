@@ -61,10 +61,6 @@ function calcVideoPosition(time){
     {
         videoposition = videoposition + 1;
     }
-    document.getElementById('servertime').innerHTML = "<b>Server Time:</b> " + time;
-    document.getElementById('clienttime').innerHTML = "<b>Client Time:</b> " + (new Date()).getTime();
-    document.getElementById('clienttime').innerHTML = "<b>Client Time:</b> " + (new Date()).getTime();
-    document.getElementById('videotime').innerHTML = "<b>Video Time:</b> " + videoposition;
     return videoposition;
 }
 
