@@ -18,13 +18,13 @@
                     Views:
                 </td>
                 <td>
-                    
+                    {{room.views}}
                 </td>
                 <td>
                     Connected Users:
                 </td>
                 <td>
-                    
+                    {{room.connectedUsers}}
                 </td>
             </tr>
         </table>
