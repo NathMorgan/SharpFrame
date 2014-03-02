@@ -84,7 +84,7 @@ class Rooms extends \Phalcon\Mvc\Collection
     
     public function setViews($views)
     {
-        $this->views -> $views;
+        $this->views = $views;
     }
     
     public function getViews()
@@ -94,7 +94,7 @@ class Rooms extends \Phalcon\Mvc\Collection
     
     public function setConnectedUsers($connectedusers)
     {
-        $this->connectedUsers -> $connectedusers;
+        $this->connectedUsers = $connectedusers;
     }
     
     public function getConnectedUsers()
