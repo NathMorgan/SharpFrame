@@ -12,7 +12,7 @@ class Room
             return false;
         }
         
-        //Pattern refferenced from http://www.mkyong.com/regular-expressions/how-to-validate-image-file-extension-with-regular-expression/
+        //Checking if the uploaded file is an image regex code is refferenced from http://www.mkyong.com/regular-expressions/how-to-validate-image-file-extension-with-regular-expression/
         if(!preg_match("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)", $iconfile['name']))
         {
             $this->error = "The file uploaded is not an image";
@@ -23,7 +23,18 @@ class Room
         $videoid = "";
         if (!preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $videolink, $videoid))
         {
-            $this->error = "The youtube link is invalid";
+            $this->error = "Youtube link is invalid";
+            return false;
+        }
+        
+        //Checking if the URL is a valid youtube id and getting the length of the video
+        $youtubejson = file_get_contents("http://gdata.youtube.com/feeds/api/videos/" . array_shift($videoid) . "?v=2&alt=jsonc");
+        $youtubeobj = json_decode($youtubejson);
+        
+        //Checking to see if there is an invalid youtube id error
+        if($youtubeobj->error->code == 400)
+        {
+            $this->error = "Youtube link is invalid";
             return false;
         }
         
@@ -40,6 +51,8 @@ class Room
         $room->setDiscription($description);
         $room->setVideoid(array_shift($videoid));
         $room->setOwnerUsername($user->username);
+        $room->setVideoStartTime(round(microtime(true)));
+        $room->setVideoEndTime(((int)$youtubeobj->data->duration + round(microtime(true))));
         $room->setViews(0);
         $room->setConnectedUsers(0);
         $room->setIcon($iconfile['name']);
@@ -53,7 +66,14 @@ class Room
         if(!($roomowner->save()))
             return false;
         
-        return true;
+        //Sending a request to the node.js server to force it to update the room array with the new room
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "http://localhost:7979/updateroom/");
+        curl_exec($curl);
+        
+        //return true;
+        
+        return false;
     }
     
     public function Delete($roomid)
