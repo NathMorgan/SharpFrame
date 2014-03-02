@@ -5,6 +5,8 @@ class Rooms extends \Phalcon\Mvc\Collection
     public $title;
     public $discription;
     public $videoid;
+    public $videoStartTime;
+    public $videoEndTime;
     public $ownerUsername;
     public $views;
     public $connectedUsers;
@@ -48,6 +50,26 @@ class Rooms extends \Phalcon\Mvc\Collection
     public function getVideoid()
     {
         return $this->videoid;
+    }
+    
+    public function setVideoStartTime($time)
+    {
+        $this->videoStartTime = $time;
+    }
+    
+    public function getVideoStartTime()
+    {
+        return $this->videoStartTime;
+    }
+    
+    public function setVideoEndTime($time)
+    {
+        $this->videoEndTime = $time;
+    }
+    
+    public function getVideoEndTime()
+    {
+        return $this->videoEndTime;
     }
     
     public function setOwnerUsername($username)
