@@ -2,38 +2,38 @@
 
 class RoomOwners extends \Phalcon\Mvc\Collection
 {
-    public $_RoomOwnerid;
-    public $Userid;
-    public $Roomid;
+    public $_id;
+    public $userid;
+    public $roomid;
     
     public function initialize()
     {
         $this->useImplicitObjectIds(false);
     }
     
-    public function getRoomOwnerid()
+    public function getid()
     {
-        return $this->_RoomOwnerid;
+        return $this->_id;
     }
     
     public function setUserid($userid)
     {
-        $this->Userid = $userid;
+        $this->userid = $userid;
     }
     
     public function getUserid()
     {
-        return $this->Userid;
+        return $this->userid;
     }
     
     public function setRoomid($roomid)
     {
-        $this->Roomid = $roomid;
+        $this->roomid = $roomid;
     }
     
     public function getRoomid()
     {
-        return $this->Roomid;
+        return $this->roomid;
     }
 }
 
